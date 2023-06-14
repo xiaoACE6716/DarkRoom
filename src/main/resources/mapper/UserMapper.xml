@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xiaoace.darkroom.database.dao.UserDao">
+
+    <update id="dropTable">drop table if exists User;</update>
+
+    <update id="createTable">
+        CREATE TABLE IF NOT EXISTS `User`
+        (
+            `id` CHAR(50) NOT NULL PRIMARY KEY
+        )
+    </update>
+
+    <select id="selectAllUser" resultType="com.xiaoace.darkroom.database.pojo.User">
+        select id
+        from User
+    </select>
+
+    <select id="selectUserById" parameterType="String" resultType="com.xiaoace.darkroom.database.pojo.User">
+        select id
+        from User
+        where id = #{id}limit 1
+    </select>
+
+    <delete id="deleteUserById" parameterType="String">
+        delete
+        from User
+        where id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.xiaoace.darkroom.database.pojo.User" useGeneratedKeys="false">
+        insert into User (id)
+        values (#{id})
+    </insert>
+
+</mapper>
